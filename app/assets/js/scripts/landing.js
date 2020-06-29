@@ -10,7 +10,6 @@ const {URL} = require('url')
 const DiscordWrapper = require('./assets/js/discordwrapper')
 const Mojang = require('./assets/js/mojang')
 const ProcessBuilder = require('./assets/js/processbuilder')
-const ServerStatus = require('./assets/js/serverstatus')
 
 // Launch Elements
 const launch_content = document.getElementById('launch_content')
@@ -396,7 +395,7 @@ function asyncSystemScan(mcVersion, launchAfter = true) {
                 // User will have to follow the guide to install Java.
                 setOverlayContent(
                     'Unexpected Issue:<br>Java Download Failed',
-                    'Unfortunately we\'ve encountered an issue while attempting to install Java. You will need to manually install a copy. Please check out our <a href="https://github.com/dscalzi/HeliosLauncher/wiki">Troubleshooting Guide</a> for more details and instructions.',
+                    'Unfortunately we\'ve encountered an issue while attempting to install Java. You will need to manually install a copy.',
                     'I Understand'
                 )
                 setOverlayHandler(() => {
@@ -531,12 +530,12 @@ function dlAsync(login = true) {
     })
     aEx.on('error', (err) => {
         loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
+        showLaunchFailure('Error During Launch', err.message || 'Contact us on forum.sakuramc.us')
     })
     aEx.on('close', (code, signal) => {
         if (code !== 0) {
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error During Launch', 'See console (CTRL + Shift + i) for more details.')
+            showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
         }
     })
 
@@ -626,7 +625,7 @@ function dlAsync(login = true) {
                     } else {
                         showLaunchFailure(
                             'Download Error',
-                            'Check the console (CTRL + Shift + i) for more details. Please try again.'
+                            'Could not download, Contact us on forum.sakuramc.us'
                         )
                     }
 
@@ -645,7 +644,7 @@ function dlAsync(login = true) {
                 loggerLaunchSuite.error('Error during validation:', m.result)
 
                 loggerLaunchSuite.error('Error during launch', m.result.error)
-                showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
 
                 allGood = false
             }
@@ -719,7 +718,7 @@ function dlAsync(login = true) {
                 } catch (err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                    showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
 
                 }
             }
@@ -756,7 +755,7 @@ function dlAsync(login = true) {
         }, (err) => {
             loggerLaunchSuite.error('Unable to refresh distribution index.', err)
             if (DistroManager.getDistribution() == null) {
-                showLaunchFailure('Fatal Error', 'Could not load a copy of the distribution index. See the console (CTRL + Shift + i) for more details.')
+                showLaunchFailure('Fatal Error', 'Contact us on forum.sakuramc.us')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
