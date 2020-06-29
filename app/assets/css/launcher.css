@@ -996,10 +996,12 @@ body, button {
     cursor: pointer;
     outline: none;
     transition: 0.25s ease;
+    font-size: 20px;
+    color: mediumpurple;
 }
 #settingsNavDone:hover,
 #settingsNavDone:focus {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white, 0px 0px 20px white;
+    text-shadow: 0px 0px 15px mediumpurple, 0px 0px 15px mediumpurple, 0px 0px 15px mediumpurple;
 }
 #settingsNavDone:active {
     text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75);
@@ -3002,6 +3004,7 @@ input:checked + .toggleSwitchSlider:before {
     background: rgba(107, 105, 105, 0.7);
     margin-left: 40px;
     margin-right: 20px;
+    margin-top: 5px;
 }
 
 .playerCounts {
@@ -3016,6 +3019,7 @@ input:checked + .toggleSwitchSlider:before {
 #server_status_wrapper {
     display: inline-flex;
     width: 75px;
+    margin-top: 5px;
 }
 
 /* Span which displays the player count of the selected server. */
@@ -3031,6 +3035,7 @@ input:checked + .toggleSwitchSlider:before {
     position: relative;
     display: flex;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 /* Icon which displays the status of the mojang services. */
@@ -3140,6 +3145,8 @@ input:checked + .toggleSwitchSlider:before {
 /* Button which opens the news view. */
 #newsButton {
     background: none;
+    margin-top: 30px;
+    margin-left: 30px;
     border: none;
     cursor: pointer;
     outline: none;
@@ -3216,14 +3223,17 @@ input:checked + .toggleSwitchSlider:before {
     font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 25px;
+    font-size: 30px;
     padding: 0px;
+    color: #fd56fe;
+    margin-top: -5px;
+    margin-right: -13px;
     transition: 0.25s ease;
     outline: none;
 }
 #launch_button:hover,
 #launch_button:focus {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #fff;
+    text-shadow: 0px 0px 20px #fd56fe, 0px 0px 20px #fd56fe;
 }
 #launch_button:active {
     color: #c7c7c7;
@@ -3273,6 +3283,7 @@ input:checked + .toggleSwitchSlider:before {
     cursor: pointer;
     line-height: 24px;
     padding: 0px;
+    margin-top: -5px;
     transition: 0.25s ease;
 }
 #server_selection_button:hover,
