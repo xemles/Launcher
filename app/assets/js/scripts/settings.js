@@ -1221,10 +1221,11 @@ function populateAboutVersionInformation(){
 function populateReleaseNotes(){
     $.ajax({
         url: 'https://github.com/dscalzi/HeliosLauncher/releases.atom',
+        //RECODER AVEC DU JSON BALEC
         success: (data) => {
             const version = 'v' + remote.app.getVersion()
             const entries = $(data).find('entry')
-            
+
             for(let i=0; i<entries.length; i++){
                 const entry = $(entries[i])
                 let id = entry.find('id').text()
@@ -1287,6 +1288,7 @@ function settingsUpdateButtonStatus(text, disabled = false, handler = null){
  * @param {Object} data The update data.
  */
 function populateSettingsUpdateInformation(data){
+    //ICI C'EST QUAND YA UNE UPDATE AVEC LES RELEASE
     if(data != null){
         settingsUpdateTitle.innerHTML = `New ${isPrerelease(data.version) ? 'Pre-release' : 'Release'} Available`
         settingsUpdateChangelogCont.style.display = null
