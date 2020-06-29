@@ -1216,6 +1216,7 @@ function populateAboutVersionInformation(){
 /**
  * Fetches the GitHub atom release feed and parses it for the release notes
  * of the current version. This value is displayed on the UI.
+ * C'est les notes
  */
 function populateReleaseNotes(){
     $.ajax({

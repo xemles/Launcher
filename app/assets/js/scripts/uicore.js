@@ -36,6 +36,7 @@ webFrame.setZoomLevel(0)
 webFrame.setVisualZoomLevelLimits(1, 1)
 
 // Initialize auto updates in production environments.
+//ICI
 let updateCheckListener
 if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
@@ -48,7 +49,7 @@ if(!isDev){
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://gitlab.com/Verttigo/sakura-launcher/-/releases/download/v${info.version}/SakuraLauncher-setup-${info.version}.dmg`
+                    info.darwindownload = `http://files.sakuramc.us/Update/SakuraLauncher-setup-${info.version}.dmg`
                     showUpdateUI(info)
                 }
                 

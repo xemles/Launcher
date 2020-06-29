@@ -22,6 +22,12 @@ builder.build({
         productName: 'SakuraLauncher',
         artifactName: '${productName}-setup-${version}.${ext}',
         copyright: 'Copyright © 2020 SakuraMC',
+        publish: [
+            {
+                provider: 'generic',
+                url: 'http://files.sakuramc.us/Update'
+            }
+        ],
         directories: {
             buildResources: 'build',
             output: 'dist'
