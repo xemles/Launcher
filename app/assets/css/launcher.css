@@ -3023,7 +3023,7 @@ input:checked + .toggleSwitchSlider:before {
     color: red;
     font-size: 5px;
 
-    margin-left: 17px;
+    margin-left: 16.5px;
 }
 
 /* Wrapper container for the mojang status bar. */

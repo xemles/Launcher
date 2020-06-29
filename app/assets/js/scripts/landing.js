@@ -234,7 +234,7 @@ const refreshServerStatus = async function (fade = false) {
     }).then((state) => {
         pLabel = 'PLAYERS'
         pVal = state.players.length
-        document.getElementById('player_count').style.color = 'green'
+        document.getElementById('player_count').style.color = '#fd56fe'
         if (fade) {
             $('#server_status_wrapper').fadeOut(250, () => {
                 document.getElementById('landingPlayerLabel').innerHTML = pLabel
