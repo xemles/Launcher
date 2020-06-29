@@ -477,7 +477,7 @@ let proc
 let hasRPC = false
 // Joined server regex
 const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
-const GAME_JOINED_REGEX = /\[.+\]: Skipping bad option: lastServer:/
+//const GAME_JOINED_REGEX = /\[.+\]: Skipping bad option: lastServer:/
 const GAME_LAUNCH_REGEX = /^\[.+\]: MinecraftForge .+ Initialized$/
 
 let aEx
@@ -666,7 +666,7 @@ function dlAsync(login = true) {
                     if (GAME_LAUNCH_REGEX.test(data.trim())) {
                         toggleLaunchArea(false)
                         if (hasRPC) {
-                            DiscordWrapper.updateDetails('Loading game..')
+                            DiscordWrapper.updateDetails('In Game')
                         }
                         proc.stdout.on('data', gameStateChange)
                         proc.stdout.removeListener('data', tempListener)
@@ -675,6 +675,7 @@ function dlAsync(login = true) {
                 }
 
                 // Listener for Discord RPC.
+                /*
                 const gameStateChange = function (data) {
                     data = data.trim()
                     if (SERVER_JOINED_REGEX.test(data)) {
@@ -683,6 +684,7 @@ function dlAsync(login = true) {
                         DiscordWrapper.updateDetails('Playing on SakuraMC!')
                     }
                 }
+                 */
 
                 const gameErrorListener = function (data) {
                     data = data.trim()
