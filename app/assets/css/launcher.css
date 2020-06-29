@@ -3000,7 +3000,7 @@ input:checked + .toggleSwitchSlider:before {
     height: 25px;
     width: 2px;
     background: rgba(107, 105, 105, 0.7);
-    margin-left: 20px;
+    margin-left: 40px;
     margin-right: 20px;
 }
 
@@ -3023,7 +3023,7 @@ input:checked + .toggleSwitchSlider:before {
     color: red;
     font-size: 5px;
 
-    margin-left: 10px;
+    margin-left: 17px;
 }
 
 /* Wrapper container for the mojang status bar. */
