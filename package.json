@@ -3,11 +3,11 @@
   "version": "1.2.0",
   "productName": "Sakura Launcher",
   "description": "SakuraMC Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/) && Verttigo for the fork",
+  "author": "Daniel Scalzi (https://github.com/dscalzi/) && Sakura's team",
   "license": "UNLICENSED",
-  "homepage": "https://gitlab.com/Verttigo/sakura-launcher",
+  "homepage": "https://gitlab.com/SakuraMC/sakura-launcher",
   "bugs": {
-    "url": "https://gitlab.com/Verttigo/sakura-launcher/issues"
+    "url": "https://gitlab.com/SakuraMC/sakura-launcher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -53,6 +53,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:Verttigo/sakura-launcher.git"
+    "url": "git@gitlab.com:SakuraMC/sakura-launcher.git"
   }
 }
