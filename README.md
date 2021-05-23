@@ -201,7 +201,7 @@ The best way to contact the developers is on Discord.
 
 ---
 
-### See you ingame.
+### See you ingame test
 
 
 [nodejs]: https://nodejs.org/en/ 'Node.js'
