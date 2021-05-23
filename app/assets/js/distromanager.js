@@ -537,8 +537,7 @@ exports.pullRemote = function(){
         return exports.pullLocal()
     }
     return new Promise((resolve, reject) => {
-        const distroURL = 'http://mc.westeroscraft.com/WesterosCraftLauncher/distribution.json'
-        //const distroURL = 'https://gist.githubusercontent.com/dscalzi/53b1ba7a11d26a5c353f9d5ae484b71b/raw/'
+        const distroURL = 'http://files.sakuramc.us/Launcher/distribution.json'
         const opts = {
             url: distroURL,
             timeout: 2500
@@ -551,21 +550,17 @@ exports.pullRemote = function(){
                     data = DistroIndex.fromJSON(JSON.parse(body))
                 } catch (e) {
                     reject(e)
-                    return
                 }
 
                 fs.writeFile(distroDest, body, 'utf-8', (err) => {
                     if(!err){
                         resolve(data)
-                        return
                     } else {
                         reject(err)
-                        return
                     }
                 })
             } else {
                 reject(error)
-                return
             }
         })
     })
@@ -580,10 +575,8 @@ exports.pullLocal = function(){
             if(!err){
                 data = DistroIndex.fromJSON(JSON.parse(d))
                 resolve(data)
-                return
             } else {
                 reject(err)
-                return
             }
         })
     })

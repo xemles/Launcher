@@ -40,12 +40,14 @@ const statuses = [
         name: 'Public API',
         essential: false
     },
+    /*
     {
         service: 'minecraft.net',
         status: 'grey',
         name: 'Minecraft.net',
         essential: false
     },
+     */
     {
         service: 'account.mojang.com',
         status: 'grey',
@@ -67,7 +69,7 @@ const statuses = [
 exports.statusToHex = function(status){
     switch(status.toLowerCase()){
         case 'green':
-            return '#a5c325'
+            return '#008000'
         case 'yellow':
             return '#eac918'
         case 'red':

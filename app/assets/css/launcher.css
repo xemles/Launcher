@@ -484,10 +484,13 @@ body, button {
 }
 
 /* Logo on login form. */
-#loginImage {
+#loginImageSeal {
     border-radius: 50%;
+    border: 2px solid #cad7e1;
+    background: rgba(1, 2, 1, 0.5);
     height: 125px;
     width: 125px;
+    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
     margin-bottom: 20px;
 }
 
@@ -538,15 +541,15 @@ body, button {
     10%, 90% {
         transform: translate3d(-1px, 0, 0);
     }
-    
+
     20%, 80% {
         transform: translate3d(2px, 0, 0);
     }
-  
+
     30%, 50%, 70% {
         transform: translate3d(-4px, 0, 0);
     }
-  
+
     40%, 60% {
         transform: translate3d(4px, 0, 0);
     }
@@ -993,10 +996,12 @@ body, button {
     cursor: pointer;
     outline: none;
     transition: 0.25s ease;
+    font-size: 20px;
+    color: mediumpurple;
 }
 #settingsNavDone:hover,
 #settingsNavDone:focus {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white, 0px 0px 20px white;
+    text-shadow: 0px 0px 15px mediumpurple, 0px 0px 15px mediumpurple, 0px 0px 15px mediumpurple;
 }
 #settingsNavDone:active {
     text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75);
@@ -2662,19 +2667,17 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Logo image. */
 #image_seal {
-    height: 70px;
+    height: 100px;
     width: auto;
     position: relative;
-    border: 2px solid white;
     box-sizing: border-box;
-    border-radius: 50%;
 }
 
 /* Logo container styles. */
 #image_seal_container {
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
     margin-top: 50px;
 }
@@ -2820,7 +2823,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* User profile name text. */
 #user_text {
-    font-size: 12px;
+    font-size: 18px;
     min-width: 135px;
     font-weight: 900;
     letter-spacing: 1px;
@@ -2853,7 +2856,7 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 27px;
+    height: 50px;
 }
 
 /* Divider bar between the external and internal icons. */
@@ -2867,11 +2870,11 @@ input:checked + .toggleSwitchSlider:before {
 /* Social media icon shared styles. */
 .mediaSVG {
     fill: #ffffff;
-    height: 12px;
+    height: 10px;
     transition: 0.25s ease;
     cursor: pointer;
-    height: 12px;
-    width: 25px;
+    height: 16px;
+    width: 50px;
 }
 .mediaSVG:hover,
 .mediaURL:focus .mediaSVG,
@@ -2901,12 +2904,12 @@ input:checked + .toggleSwitchSlider:before {
 /* Settings icon colors. */
 #settingsSVG {
     stroke: #ffffff;
-    height: 15px;
+    height: 30px;
 }
 .mediaButton:hover #settingsSVG,
 .mediaButton:focus #settingsSVG,
 .mediaButton:active #settingsSVG {
-    height: 23px;
+    height: 50px;
 }
 
 /* Settings tooltip styles. */
@@ -2988,7 +2991,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Style for a general label on the bottom of the landing view. */
 .bot_label {
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 1px;
     font-weight: bold;
     text-shadow: 0px 0px 0px #bebcbb;
@@ -2999,8 +3002,13 @@ input:checked + .toggleSwitchSlider:before {
     height: 25px;
     width: 2px;
     background: rgba(107, 105, 105, 0.7);
-    margin-left: 20px;
+    margin-left: 40px;
     margin-right: 20px;
+    margin-top: 5px;
+}
+
+.playerCounts {
+    text-align: center;
 }
 
 /* * *
@@ -3011,15 +3019,15 @@ input:checked + .toggleSwitchSlider:before {
 #server_status_wrapper {
     display: inline-flex;
     width: 75px;
+    margin-top: 5px;
 }
 
 /* Span which displays the player count of the selected server. */
 #player_count {
-    color: #949494;
-    font-size: 8px;
-    font-weight: 900;
-    text-shadow: 0px 0px 20px #949494;
-    margin-left: 10px;
+    color: red;
+    font-size: 5px;
+
+    margin-left: 16.5px;
 }
 
 /* Wrapper container for the mojang status bar. */
@@ -3027,6 +3035,7 @@ input:checked + .toggleSwitchSlider:before {
     position: relative;
     display: flex;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 /* Icon which displays the status of the mojang services. */
@@ -3050,7 +3059,7 @@ input:checked + .toggleSwitchSlider:before {
     padding: 5px 10px;
     z-index: 1;
     font-family: 'Avenir Medium';
-    font-size: 12px;
+    font-size: 25px;
     transition: visibility 0s linear 0.25s, opacity 0.25s ease;
     bottom: calc(100% + 15px);
     transform: translateX(-50%);
@@ -3109,10 +3118,14 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
 }
 
+#player_count {
+    font-size: 18px;
+}
+
 /* Displays the name of the mojang service. */
 .mojangStatusName {
     width: 100%;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 1px;
     line-height: 12px;
     padding: 6px 0px;
@@ -3132,6 +3145,8 @@ input:checked + .toggleSwitchSlider:before {
 /* Button which opens the news view. */
 #newsButton {
     background: none;
+    margin-top: 30px;
+    margin-left: 30px;
     border: none;
     cursor: pointer;
     outline: none;
@@ -3161,8 +3176,8 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Icon which indicates there is new news. */
 #newsButtonAlert {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     position: absolute;
     border-radius: 50%;
     background: red;
@@ -3172,7 +3187,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Arrow image which floats above the news button. */
 #newsButtonSVG {
-    height: 11px;
+    height: 15px;
     margin-left: -2px;
     transition: 0.25s ease;
 }
@@ -3183,7 +3198,7 @@ input:checked + .toggleSwitchSlider:before {
     font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 11px;
+    font-size: 18px;
     line-height: 30px;
     display: flex;
     transition: 0.25s ease;
@@ -3208,14 +3223,17 @@ input:checked + .toggleSwitchSlider:before {
     font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 20px;
+    font-size: 30px;
     padding: 0px;
+    color: #fd56fe;
+    margin-top: -5px;
+    margin-right: -13px;
     transition: 0.25s ease;
     outline: none;
 }
 #launch_button:hover,
 #launch_button:focus {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #fff;
+    text-shadow: 0px 0px 20px #fd56fe, 0px 0px 20px #fd56fe;
 }
 #launch_button:active {
     color: #c7c7c7;
@@ -3233,7 +3251,7 @@ input:checked + .toggleSwitchSlider:before {
     top: 25px;
     display: none;
 }
- 
+
 /* Left side of launch details container, displays percentage and a divider. */
 #launch_details_left {
     display: flex;
@@ -3265,6 +3283,7 @@ input:checked + .toggleSwitchSlider:before {
     cursor: pointer;
     line-height: 24px;
     padding: 0px;
+    margin-top: -5px;
     transition: 0.25s ease;
 }
 #server_selection_button:hover,
@@ -3291,7 +3310,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Span which displays information about the status of the launch process. */
 #launch_details_text {
-    font-size: 11px;
+    font-size: 16px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -3747,7 +3766,7 @@ input:checked + .toggleSwitchSlider:before {
 /* Stationary image for the spinner. */
 #loadCenterImage {
     position: absolute;
-    width: 277px;
+    width: 150px;
     height: auto;
 }
 

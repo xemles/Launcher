@@ -1,6 +1,5 @@
-/node_modules/
-/.vs/
-/.vscode/
-/target/
-/logs/
-/dist/
+node_modules
+dist
+.idea
+.cdn
+.Nebula

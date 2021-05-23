@@ -166,38 +166,22 @@ class Util {
         return true
     }
 
-    static isForgeGradle3(mcVersion, forgeVersion) {
+}
 
-        if(Util.mcVersionAtLeast('1.13', mcVersion)) {
-            return true
-        }
 
-        try {
-            
-            const forgeVer = forgeVersion.split('-')[1]
+class JavaGuard extends EventEmitter {
 
-            const maxFG2 = [14, 23, 5, 2847]
-            const verSplit = forgeVer.split('.').map(v => Number(v))
-
-            for(let i=0; i<maxFG2.length; i++) {
-                if(verSplit[i] > maxFG2[i]) {
-                    return true
-                } else if(verSplit[i] < maxFG2[i]) {
-                    return false
-                }
-            }
-        
-            return false
-
-        } catch(err) {
-            throw new Error('Forge version is complex (changed).. launcher requires a patch.')
-        }
+    constructor(mcVersion){
+        super()
+        this.mcVersion = mcVersion
     }
 
     static isAutoconnectBroken(forgeVersion) {
 
+        const forgeVer = forgeVersion.split('-')[1]
+
         const minWorking = [31, 2, 15]
-        const verSplit = forgeVersion.split('.').map(v => Number(v))
+        const verSplit = forgeVer.split('.').map(v => Number(v))
 
         if(verSplit[0] === 31) {
             for(let i=0; i<minWorking.length; i++) {
@@ -211,53 +195,6 @@ class Util {
 
         return false
     }
-
-}
-
-
-class JavaGuard extends EventEmitter {
-
-    constructor(mcVersion){
-        super()
-        this.mcVersion = mcVersion
-    }
-
-    // /**
-    //  * @typedef OracleJREData
-    //  * @property {string} uri The base uri of the JRE.
-    //  * @property {{major: string, update: string, build: string}} version Object containing version information.
-    //  */
-
-    // /**
-    //  * Resolves the latest version of Oracle's JRE and parses its download link.
-    //  * 
-    //  * @returns {Promise.<OracleJREData>} Promise which resolved to an object containing the JRE download data.
-    //  */
-    // static _latestJREOracle(){
-
-    //     const url = 'https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html'
-    //     const regex = /https:\/\/.+?(?=\/java)\/java\/jdk\/([0-9]+u[0-9]+)-(b[0-9]+)\/([a-f0-9]{32})?\/jre-\1/
-    
-    //     return new Promise((resolve, reject) => {
-    //         request(url, (err, resp, body) => {
-    //             if(!err){
-    //                 const arr = body.match(regex)
-    //                 const verSplit = arr[1].split('u')
-    //                 resolve({
-    //                     uri: arr[0],
-    //                     version: {
-    //                         major: verSplit[0],
-    //                         update: verSplit[1],
-    //                         build: arr[2]
-    //                     }
-    //                 })
-    //             } else {
-    //                 resolve(null)
-    //             }
-    //         })
-    //     })
-    // }
-
     /**
      * @typedef OpenJDKData
      * @property {string} uri The base uri of the JRE.
@@ -266,26 +203,13 @@ class JavaGuard extends EventEmitter {
      */
 
     /**
-     * Fetch the last open JDK binary.
-     * 
-     * HOTFIX: Uses Corretto 8 for macOS.
-     * See: https://github.com/dscalzi/HeliosLauncher/issues/70
-     * See: https://github.com/AdoptOpenJDK/openjdk-support/issues/101
+     * Fetch the last open JDK binary. Uses https://api.adoptopenjdk.net/
      * 
      * @param {string} major The major version of Java to fetch.
      * 
      * @returns {Promise.<OpenJDKData>} Promise which resolved to an object containing the JRE download data.
      */
     static _latestOpenJDK(major = '8'){
-
-        if(process.platform === 'darwin') {
-            return this._latestCorretto(major)
-        } else {
-            return this._latestAdoptOpenJDK(major)
-        }
-    }
-
-    static _latestAdoptOpenJDK(major) {
 
         const sanitizedOS = process.platform === 'win32' ? 'windows' : (process.platform === 'darwin' ? 'mac' : process.platform)
 
@@ -304,48 +228,6 @@ class JavaGuard extends EventEmitter {
                 }
             })
         })
-
-    }
-
-    static _latestCorretto(major) {
-
-        let sanitizedOS, ext
-
-        switch(process.platform) {
-            case 'win32':
-                sanitizedOS = 'windows'
-                ext = 'zip'
-                break
-            case 'darwin':
-                sanitizedOS = 'macos'
-                ext = 'tar.gz'
-                break
-            case 'linux':
-                sanitizedOS = 'linux'
-                ext = 'tar.gz'
-                break
-            default:
-                sanitizedOS = process.platform
-                ext = 'tar.gz'
-                break
-        }
-
-        const url = `https://corretto.aws/downloads/latest/amazon-corretto-${major}-x64-${sanitizedOS}-jdk.${ext}`
-
-        return new Promise((resolve, reject) => {
-            request.head({url, json: true}, (err, resp) => {
-                if(!err && resp.statusCode === 200){
-                    resolve({
-                        uri: url,
-                        size: parseInt(resp.headers['content-length']),
-                        name: url.substr(url.lastIndexOf('/')+1)
-                    })
-                } else {
-                    resolve(null)
-                }
-            })
-        })
-
     }
 
     /**
@@ -510,11 +392,6 @@ class JavaGuard extends EventEmitter {
                         } */
                     }
                 }
-                // Space included so we get only the vendor.
-            } else if(props[i].lastIndexOf('java.vendor ') > -1) {
-                let vendorName = props[i].split('=')[1].trim()
-                console.log(props[i].trim())
-                meta.vendor = vendorName
             }
         }
 
@@ -709,26 +586,51 @@ class JavaGuard extends EventEmitter {
      * @returns {Promise.<Set.<string>>} A promise which resolves to a set of the discovered
      * root JVM folders.
      */
-    static async _scanFileSystem(scanDir){
+    static _scanFileSystem(scanDir){
+        return new Promise((resolve, reject) => {
 
-        let res = new Set()
+            fs.exists(scanDir, (e) => {
 
-        if(await fs.pathExists(scanDir)) {
+                let res = new Set()
+                
+                if(e){
+                    fs.readdir(scanDir, (err, files) => {
+                        if(err){
+                            resolve(res)
+                            console.log(err)
+                        } else {
+                            let pathsDone = 0
 
-            const files = await fs.readdir(scanDir)
-            for(let i=0; i<files.length; i++){
+                            for(let i=0; i<files.length; i++){
 
-                const combinedPath = path.join(scanDir, files[i])
-                const execPath = JavaGuard.javaExecFromRoot(combinedPath)
+                                const combinedPath = path.join(scanDir, files[i])
+                                const execPath = JavaGuard.javaExecFromRoot(combinedPath)
 
-                if(await fs.pathExists(execPath)) {
-                    res.add(combinedPath)
+                                fs.exists(execPath, (v) => {
+
+                                    if(v){
+                                        res.add(combinedPath)
+                                    }
+
+                                    ++pathsDone
+
+                                    if(pathsDone === files.length){
+                                        resolve(res)
+                                    }
+
+                                })
+                            }
+                            if(pathsDone === files.length){
+                                resolve(res)
+                            }
+                        }
+                    })
+                } else {
+                    resolve(res)
                 }
-            }
-        }
+            })
 
-        return res
-
+        })
     }
 
     /**
@@ -834,13 +736,9 @@ class JavaGuard extends EventEmitter {
 
         // Get possible paths from the registry.
         let pathSet1 = await JavaGuard._scanRegistry()
-        if(pathSet1.size === 0){
+        if(pathSet1.length === 0){
             // Do a manual file system scan of program files.
-            pathSet1 = new Set([
-                ...pathSet1,
-                ...(await JavaGuard._scanFileSystem('C:\\Program Files\\Java')),
-                ...(await JavaGuard._scanFileSystem('C:\\Program Files\\AdoptOpenJDK'))
-            ])
+            pathSet1 = JavaGuard._scanFileSystem('C:\\Program Files\\Java')
         }
 
         // Get possible paths from the data directory.
@@ -1048,7 +946,7 @@ class AssetGuard extends EventEmitter {
             }
             let buf = fs.readFileSync(filePath)
             let calcdhash = AssetGuard._calculateHash(buf, algo)
-            return calcdhash === hash.toLowerCase()
+            return calcdhash === hash
         }
         return false
     }
@@ -1331,7 +1229,7 @@ class AssetGuard extends EventEmitter {
         return new Promise((resolve, reject) => {
 
             //Asset constants
-            const resourceURL = 'https://resources.download.minecraft.net/'
+            const resourceURL = 'http://resources.download.minecraft.net/'
             const localPath = path.join(self.commonPath, 'assets')
             const objectPath = path.join(localPath, 'objects')
 
@@ -1531,7 +1429,7 @@ class AssetGuard extends EventEmitter {
             for(let ob of modules){
                 const type = ob.getType()
                 if(type === DistroManager.Types.ForgeHosted || type === DistroManager.Types.Forge){
-                    if(Util.isForgeGradle3(server.getMinecraftVersion(), ob.getVersion())){
+                    if(Util.mcVersionAtLeast('1.13', server.getMinecraftVersion())){
                         // Read Manifest
                         for(let sub of ob.getSubModules()){
                             if(sub.getType() === DistroManager.Types.VersionManifest){

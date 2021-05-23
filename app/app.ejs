@@ -1,7 +1,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-In6B8teKZQll5heMl9bS7CESTbGvuAt3VVV86BUQBDk='"/>
-    <title>Craftok Launcher</title>
+    <title>SakuraMC US</title>
     <script src="./assets/js/scripts/uicore.js"></script>
     <script src="./assets/js/scripts/uibinder.js"></script>
     <link type="text/css" rel="stylesheet" href="./assets/css/launcher.css">
@@ -27,18 +27,18 @@
     </style>
 </head>
 <body bkid="<%=bkid%>">
-    <%- include('frame') %>
+    <% include frame.ejs %>
     <div id="main">
-        <%- include('welcome') %>
-        <%- include('login') %>
-        <%- include('settings') %>
-        <%- include('landing') %>
+        <% include welcome.ejs %>
+        <% include login.ejs %>
+        <% include settings.ejs %>
+        <% include landing.ejs %>
     </div>
-    <%- include('overlay') %>
+    <% include overlay.ejs %>
     <div id="loadingContainer">
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
-                <img id="loadCenterImage" class="rotating" src="assets/images/logo/Logo@300px.png">
+                <img id="loadCenterImage" src="assets/images/loader.png" alt="Loader">
             </div>
         </div>
     </div>
