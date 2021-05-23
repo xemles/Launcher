@@ -230,7 +230,7 @@ const refreshServerStatus = async function (fade = false) {
 
     Gamedig.query({
         type: 'minecraft',
-        host: 'sakuramc.us'
+        host: 'craftok.fr'
     }).then((state) => {
         pLabel = 'PLAYERS'
         pVal = state.players.length

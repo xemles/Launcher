@@ -49,7 +49,7 @@ if(!isDev){
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `http://files.sakuramc.us/Update/SakuraLauncher-setup-${info.version}.dmg`
+                    info.darwindownload = `http://files.craftok.fr/Update/SakuraLauncher-setup-${info.version}.dmg`
                     showUpdateUI(info)
                 }
                 

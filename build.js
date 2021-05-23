@@ -18,14 +18,14 @@ function getCurrentPlatform(){
 builder.build({
     targets: (process.argv[2] != null && Platform[process.argv[2]] != null ? Platform[process.argv[2]] : getCurrentPlatform()).createTarget(),
     config: {
-        appId: 'sakuralauncher',
-        productName: 'SakuraLauncher',
+        appId: 'craftoklauncher',
+        productName: 'CraftokLauncher',
         artifactName: '${productName}-setup-${version}.${ext}',
-        copyright: 'Copyright © 2020 SakuraMC',
+        copyright: 'Copyright © 2021 Craftok',
         publish: [
             {
                 provider: 'generic',
-                url: 'http://files.sakuramc.us/Update'
+                url: 'http://files.craftok.fr/Update'
             }
         ],
         directories: {
@@ -52,10 +52,10 @@ builder.build({
         },
         linux: {
             target: 'AppImage',
-            maintainer: 'Baptiste Ferrando',
+            maintainer: 'Craftok',
             vendor: '',
-            synopsis: 'Minecraft Launcher for SakuraMC',
-            description: 'Custom launcher which allows users to join modded servers',
+            synopsis: 'Le launcher de Craftok',
+            description: 'Le launcher de Craftok (trop bien)',
             category: 'Game'
         },
         compression: 'maximum',

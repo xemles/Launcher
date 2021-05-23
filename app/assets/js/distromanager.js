@@ -537,7 +537,7 @@ exports.pullRemote = function(){
         return exports.pullLocal()
     }
     return new Promise((resolve, reject) => {
-        const distroURL = 'http://files.sakuramc.us/Launcher/distribution.json'
+        const distroURL = 'http://files.craftok.fr/Update/distribution.json'
         const opts = {
             url: distroURL,
             timeout: 2500
