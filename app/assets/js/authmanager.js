@@ -10,11 +10,11 @@
  */
 // Requirements
 const ConfigManager = require('./configmanager')
-const LoggerUtil    = require('./loggerutil')
-const Mojang        = require('./mojang')
-const {v3: uuidv3}  = require('uuid')
+const LoggerUtil = require('./loggerutil')
+const Mojang = require('./mojang')
+const {v3: uuidv3} = require('uuid')
 const {machineIdSync} = require('node-machine-id')
-const logger        = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
+const logger = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
 const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight: bold')
 
 // Functions

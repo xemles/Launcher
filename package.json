@@ -1,6 +1,6 @@
 {
   "name": "CraftokLauncher",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "productName": "Craftok Launcher",
   "description": "Craftok Minecraft Launcher",
   "author": "Daniel Scalzi (https://github.com/dscalzi/) && Craftok",
@@ -22,7 +22,7 @@
     "lint": "eslint --config .eslintrc.json ."
   },
   "engines": {
-    "node": "12.x.x"
+    "node": "15.6.x"
   },
   "dependencies": {
     "adm-zip": "^0.4.14",

@@ -222,11 +222,9 @@ const refreshMojangStatuses = async function () {
 
 const refreshServerStatus = async function (fade = false) {
     loggerLanding.log('Refreshing Server Status')
-    const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
 
     let pLabel = 'SERVER'
     let pVal = ''
-
 
     Gamedig.query({
         type: 'minecraft',
@@ -255,8 +253,8 @@ refreshMojangStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
-let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
+let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 5 * 60 * 1000)
+let serverStatusListener = setInterval(() => refreshServerStatus(true), 5 * 60 * 1000)
 
 /**
  * Shows an error overlay, toggles off the launch area.
@@ -326,7 +324,7 @@ function asyncSystemScan(mcVersion, launchAfter = true) {
                 // Show this information to the user.
                 setOverlayContent(
                     'No Compatible<br>Java Installation Found',
-                    'In order to join SakuraMC, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
+                    'In order to join Craftok, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
                     'Install Java',
                     'Install Manually'
                 )
@@ -530,12 +528,12 @@ function dlAsync(login = true) {
     })
     aEx.on('error', (err) => {
         loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'Contact us on forum.sakuramc.us')
+        showLaunchFailure('Error During Launch', err.message || 'Contact us on forum.craftok.fr')
     })
     aEx.on('close', (code, signal) => {
         if (code !== 0) {
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
+            showLaunchFailure('Error During Launch', 'Contact us on forum.craftok.fr')
         }
     })
 
@@ -625,7 +623,7 @@ function dlAsync(login = true) {
                     } else {
                         showLaunchFailure(
                             'Download Error',
-                            'Could not download, Contact us on forum.sakuramc.us'
+                            'Could not download, Contact us on forum.craftok.fr'
                         )
                     }
 
@@ -644,7 +642,7 @@ function dlAsync(login = true) {
                 loggerLaunchSuite.error('Error during validation:', m.result)
 
                 loggerLaunchSuite.error('Error during launch', m.result.error)
-                showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
+                showLaunchFailure('Error During Launch', 'Contact us on forum.craftok.fr')
 
                 allGood = false
             }
@@ -720,7 +718,7 @@ function dlAsync(login = true) {
                 } catch (err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Contact us on forum.sakuramc.us')
+                    showLaunchFailure('Error During Launch', 'Contact us on forum.craftok.fr')
 
                 }
             }
@@ -757,7 +755,7 @@ function dlAsync(login = true) {
         }, (err) => {
             loggerLaunchSuite.error('Unable to refresh distribution index.', err)
             if (DistroManager.getDistribution() == null) {
-                showLaunchFailure('Fatal Error', 'Contact us on forum.sakuramc.us')
+                showLaunchFailure('Fatal Error', 'Contact us on forum.craftok.fr')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
@@ -1081,7 +1079,7 @@ document.addEventListener('keydown', (e) => {
 function displayArticle(articleObject, index) {
     newsArticleTitle.innerHTML = articleObject.title
     newsArticleTitle.href = articleObject.link
-    newsArticleAuthor.innerHTML = 'by SakuraMC' + articleObject.author
+    newsArticleAuthor.innerHTML = 'by Craftok' + articleObject.author
     newsArticleDate.innerHTML = articleObject.date
     newsArticleComments.innerHTML = articleObject.comments
     newsArticleComments.href = articleObject.commentsLink
