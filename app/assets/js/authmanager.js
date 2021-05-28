@@ -10,26 +10,26 @@
  */
 // Requirements
 const ConfigManager = require('./configmanager')
-const LoggerUtil    = require('./loggerutil')
-const Mojang        = require('./mojang')
-const Microsoft     = require('./microsoft')
+const LoggerUtil = require('./loggerutil')
+const Mojang = require('./mojang')
+const Microsoft = require('./microsoft')
 const {v3: uuidv3} = require('uuid')
 const {machineIdSync} = require('node-machine-id')
-const logger        = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
+const logger = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
 const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight: bold')
 
 async function validateSelectedMojang() {
 
     const current = ConfigManager.getSelectedAccount()
     const isValid = await Mojang.validate(current.accessToken, ConfigManager.getClientToken())
-    if(!isValid){
+    if (!isValid) {
         try {
             const session = await Mojang.refresh(current.accessToken, ConfigManager.getClientToken())
             ConfigManager.updateAuthAccount(current.uuid, session.accessToken)
             ConfigManager.save()
-        } catch(err) {
+        } catch (err) {
             logger.log('Error while validating selected profile:', err.error)
-            if(err && err.error === 'ForbiddenOperationException'){
+            if (err && err.error === 'ForbiddenOperationException') {
                 logger.log('Connexion en crack.')
                 return true
             }
@@ -51,7 +51,7 @@ async function validateSelectedMicrosoft() {
         const MCExpiresAt = Date.parse(current.expiresAt)
         const MCExpired = now > MCExpiresAt
 
-        if(MCExpired) {
+        if (MCExpired) {
             const MSExpiresAt = Date.parse(current.microsoft.expires_at)
             const MSExpired = now > MSExpiresAt
 
@@ -87,7 +87,7 @@ async function validateSelectedMicrosoft() {
  * @param {string} password The account password.
  * @returns {Promise.<Object>} Promise which resolves the resolved authenticated account object.
  */
-exports.addAccount = async function(username, password){
+exports.addAccount = async function (username, password) {
 
     if (password === '') {
         const ret = ConfigManager.addAuthAccount(uuidv3(username + machineIdSync(), uuidv3.DNS), 'ImCrackedButIKnowItsBad', username, username)
@@ -99,9 +99,9 @@ exports.addAccount = async function(username, password){
     }
     try {
         const session = await Mojang.authenticate(username, password, ConfigManager.getClientToken())
-        if(session.selectedProfile != null){
+        if (session.selectedProfile != null) {
             const ret = ConfigManager.addAuthAccount(session.selectedProfile.id, session.accessToken, username, session.selectedProfile.name)
-            if(ConfigManager.getClientToken() == null){
+            if (ConfigManager.getClientToken() == null) {
                 ConfigManager.setClientToken(session.clientToken)
             }
             ConfigManager.save()
@@ -110,7 +110,7 @@ exports.addAccount = async function(username, password){
             throw new Error('NotPaidAccount')
         }
 
-    } catch (err){
+    } catch (err) {
         return Promise.reject(err)
     }
 }
@@ -122,10 +122,17 @@ exports.addAccount = async function(username, password){
  * @param {string} uuid The UUID of the account to be removed.
  * @returns {Promise.<void>} Promise which resolves to void when the action is complete.
  */
-exports.removeAccount = async function(uuid){
+exports.removeAccount = async function (uuid) {
     try {
         const authAcc = ConfigManager.getAuthAccount(uuid)
-        if(authAcc.type === 'microsoft'){
+        console.log(authAcc)
+
+        if (authAcc.accessToken === 'ImCrackedButIKnowItsBad') {
+            ConfigManager.removeAuthAccount(uuid)
+            ConfigManager.save()
+            return Promise.resolve()
+        }
+        if (authAcc.type === 'microsoft') {
             ConfigManager.removeAuthAccount(uuid)
             ConfigManager.save()
             return Promise.resolve()
@@ -134,7 +141,7 @@ exports.removeAccount = async function(uuid){
         ConfigManager.removeAuthAccount(uuid)
         ConfigManager.save()
         return Promise.resolve()
-    } catch (err){
+    } catch (err) {
         return Promise.reject(err)
     }
 }
@@ -149,11 +156,11 @@ exports.removeAccount = async function(uuid){
  * @returns {Promise.<boolean>} Promise which resolves to true if the access token is valid,
  * otherwise false.
  */
-exports.validateSelected = async function(){
+exports.validateSelected = async function () {
     const current = ConfigManager.getSelectedAccount()
     const isValid = await Mojang.validate(current.accessToken, ConfigManager.getClientToken())
-    if(!isValid){
-        try{
+    if (!isValid) {
+        try {
             if (ConfigManager.getSelectedAccount().type === 'microsoft') {
                 const validate = await validateSelectedMicrosoft()
                 return validate
@@ -171,8 +178,9 @@ exports.addMSAccount = async authCode => {
     try {
         const accessToken = await Microsoft.getAccessToken(authCode)
         const MCAccessToken = await Microsoft.authMinecraft(accessToken.access_token)
-        const MCProfile = await Microsoft.getMCProfile(MCAccessToken.access_token).catch(err => {})
-        if(!MCProfile) {
+        const MCProfile = await Microsoft.getMCProfile(MCAccessToken.access_token).catch(err => {
+        })
+        if (!MCProfile) {
             return Promise.reject({
                 message: 'The account you are trying to login with has not purchased a copy of Minecraft You may purchase a copy on <a href="https://minecraft.net/">Minecraft.net</a>.'
             })
@@ -181,7 +189,7 @@ exports.addMSAccount = async authCode => {
         ConfigManager.save()
 
         return ret
-    } catch(error) {
+    } catch (error) {
         return Promise.reject(error)
     }
 }

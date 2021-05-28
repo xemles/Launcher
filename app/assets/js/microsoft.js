@@ -27,7 +27,7 @@ function requestPromise(uri, options) {
 
 function getXBLToken(accessToken) {
     return new Promise((resolve, reject) => {
-        const data = new Object()
+        const data = {}
 
         const options = {
             method: 'post',
@@ -93,7 +93,7 @@ function getXSTSToken(XBLToken) {
 
 function getMCAccessToken(UHS, XSTSToken) {
     return new Promise((resolve, reject) => {
-        const data = new Object()
+        const data = {}
         const expiresAt = new Date()
 
         const options = {
@@ -120,7 +120,7 @@ function getMCAccessToken(UHS, XSTSToken) {
 exports.getAccessToken = authCode => {
     return new Promise((resolve, reject) => {
         const expiresAt = new Date()
-        const data = new Object()
+        const data = {}
 
         const options = {
             method: 'post',
@@ -149,7 +149,7 @@ exports.getAccessToken = authCode => {
 exports.refreshAccessToken = refreshToken => {
     return new Promise((resolve, reject) => {
         const expiresAt = new Date()
-        const data = new Object()
+        const data = {}
 
         const options = {
             method: 'post',
@@ -186,7 +186,7 @@ exports.authMinecraft = async accessToken => {
     }
 }
 
-exports.checkMCStore = async function(access_token){
+exports.checkMCStore = async function (access_token) {
     return new Promise((resolve, reject) => {
         request.get({
             url: 'https://api.minecraftservices.com/entitlements/mcstore',
@@ -199,7 +199,7 @@ exports.checkMCStore = async function(access_token){
                 resolve(false)
                 return
             }
-            if(body.items && body.items.length > 0) resolve(true)
+            if (body.items && body.items.length > 0) resolve(true)
             else resolve(false)
         })
     })
