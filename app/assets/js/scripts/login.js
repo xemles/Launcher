@@ -347,7 +347,7 @@ ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
                 return
             }
             case 'AuthNotFinished': {
-                setOverlayContent('ERROR', 'You have to finish the login process to use ModRealms Launcher. The window will close by itself when you have successfully logged in.', 'OK')
+                setOverlayContent('ERROR', 'Vous devez finir la connexion. Si vous n\'avez pas de compte Microsoft, utilisez un compte cracké.', 'OK')
                 setOverlayHandler(() => {
                     toggleOverlay(false)
                     toggleOverlay(false, false, 'msOverlay')
