@@ -105,7 +105,7 @@ ipcMain.on('openMSALoginWindow', (ipcEvent, args) => {
         width: 520,
         height: 600,
         frame: true,
-        icon: getPlatformIcon('SealCircle')
+        icon: getPlatformIcon('logo')
     })
 
     MSALoginWindow.on('closed', () => {
@@ -150,7 +150,7 @@ ipcMain.on('openMSALogoutWindow', (ipcEvent, args) => {
             width: 520,
             height: 600,
             frame: true,
-            icon: getPlatformIcon('SealCircle')
+            icon: getPlatformIcon('logo')
         })
         MSALogoutWindow.loadURL('https://login.microsoftonline.com/common/oauth2/v2.0/logout')
         MSALogoutWindow.webContents.on('did-navigate', (e) => {
@@ -174,7 +174,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: 980,
         height: 552,
-        icon: getPlatformIcon('SealCircle'),
+        icon: getPlatformIcon('logo'),
         frame: false,
         webPreferences: {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),

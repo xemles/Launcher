@@ -72,13 +72,13 @@ function getXSTSToken(XBLToken) {
                 switch (response.body.XErr) {
                     case 2148916233:
                         reject({
-                            message: 'Your Microsoft account is not connected to an Xbox account. Please create one before continuing.<br>'
+                            message: 'Votre compte Microsoft n\'est pas connecté à un compte Xbox. Créez en un pour continuer ou utilisez un compte cracké !<br>'
                         })
                         return
 
                     case 2148916238:
                         reject({
-                            message: 'Since you are not yet 18 years old, an adult must add you to a family in order for you to use Helios Launcher!'
+                            message: 'Vu que vous n\'avez pas 18 ans ou plus, un adulte doit vous ajouter pour jouer sur le Craftok Launcher ! Sinon, utilisez un compte cracké !'
                         })
                         return
                 }

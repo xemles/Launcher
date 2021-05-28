@@ -300,7 +300,7 @@ function populateAccountListings() {
     let htmlString = ''
     for (let i = 0; i < accounts.length; i++) {
         htmlString += `<button class="accountListing" uuid="${accounts[i].uuid}" ${i === 0 ? 'selected' : ''}>
-            <img src="https://crafatar.com/renders/head/${accounts[i].uuid}?scale=2&default=MHF_Steve&overlay">
+            <img src="https://minotar.net/armor/body/${accounts[i].uuid}.png">
             <div class="accountListingName">${accounts[i].displayName}</div>
         </button>`
     }
