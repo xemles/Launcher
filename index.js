@@ -17,7 +17,7 @@ const clientID = '2b4833a6-7c36-42b6-b17b-c3318b40f173'
 function initAutoUpdater(event, data) {
 
     if(data){
-        autoUpdater.allowPrerelease = true
+        autoUpdater.allowPrerelease = false
     } else {
         // Defaults to true if application version contains prerelease components (e.g. 0.12.1-alpha.1)
         // autoUpdater.allowPrerelease = true
