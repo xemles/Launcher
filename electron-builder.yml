@@ -1,7 +1,7 @@
 appId: 'craftoklauncher'
 productName: 'Craftok Launcher'
 publish: {provider: github, releaseType: prerelease, vPrefixedTagName: true}
-artifactName: '${productName}-setup-${version}.${ext}'
+artifactName: '${productName}-setup.${ext}'
 
 copyright: 'Craftok - 2021'
 
@@ -19,6 +19,7 @@ win:
   target:
     - target: 'nsis'
       arch: 'x64'
+  artifactName: '${productName}.${ext}'
 
 # Windows Installer Configuration
 nsis:
@@ -34,7 +35,7 @@ mac:
       arch:
         - 'x64'
         - 'arm64'
-  artifactName: '${productName}-setup-${version}-${arch}.${ext}'
+  artifactName: '${productName}-setup-${arch}.${ext}'
   category: 'public.app-category.games'
 
 # Linux Configuration
@@ -45,6 +46,7 @@ linux:
   synopsis: 'Le launcher Craftok omg'
   description: 'Launcher de Craftok'
   category: 'Game'
+  artifactName: '${productName}.${ext}'
 
 
 directories:
