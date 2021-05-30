@@ -25,4 +25,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
 
           # Si ça contient "RELEASE" au début du commit bah ça va lâcher une bonne grosse prerelease
-          release: ${{ startsWith(github.event_name, 'RELEASE') }}
+          #release: ${{ startsWith(github.event_name, 'RELEASE') }}
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
