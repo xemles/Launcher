@@ -4,3 +4,6 @@
 /target/
 /logs/
 /dist/
+/.idea/
+/libraries/
+.nvmrc
