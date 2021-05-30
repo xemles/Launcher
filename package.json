@@ -1,6 +1,6 @@
 {
   "name": "craftoklauncher",
-  "version": "1.0.7",
+  "version": "1.0.5",
   "productName": "Craftok Launcher",
   "description": "Craftok Minecraft Launcher",
   "author": "Daniel Scalzi (https://github.com/dscalzi/) & Craftok",
@@ -17,8 +17,12 @@
     "dist:win": "npm run dist -- -w",
     "dist:mac": "npm run dist -- -m",
     "dist:linux": "npm run dist -- -l",
-    "lint": "eslint --config .eslintrc.json ."
+    "lint": "eslint --config .eslintrc.json .",
+    "patchversion": "npm --no-git-tag-version version patch"
   },
+  "pre-commit": [
+    "patchversion"
+  ],
   "engines": {
     "node": "14.x.x"
   },
@@ -44,7 +48,8 @@
   "devDependencies": {
     "electron": "^12.0.7",
     "electron-builder": "^22.10.5",
-    "eslint": "^7.26.0"
+    "eslint": "^7.26.0",
+    "pre-commit": "^1.2.2"
   },
   "repository": {
     "type": "git",
