@@ -1,6 +1,6 @@
 appId: 'craftoklauncher'
 productName: 'Craftok Launcher'
-publish: {provider: github, releaseType: release, vPrefixedTagName: true}
+publish: {provider: github, releaseType: prerelease, vPrefixedTagName: false}
 artifactName: '${productName}-setup.${ext}'
 
 copyright: 'Craftok - 2021'
