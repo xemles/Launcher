@@ -43,7 +43,7 @@ if (!isDev) {
         switch (arg) {
             case 'checking-for-update':
                 loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Recherche de mise à jour', true)
+                settingsUpdateButtonStatus('Recherche de mise à jour en cours...', true)
                 break
             case 'update-available':
                 loggerAutoUpdaterSuccess.log('Une mise à jour est disponible', info.version)
