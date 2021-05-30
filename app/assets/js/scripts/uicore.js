@@ -43,10 +43,10 @@ if (!isDev) {
         switch (arg) {
             case 'checking-for-update':
                 loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Checking for Updates..', true)
+                settingsUpdateButtonStatus('Recherche de mise à jour', true)
                 break
             case 'update-available':
-                loggerAutoUpdaterSuccess.log('New update available', info.version)
+                loggerAutoUpdaterSuccess.log('Une mise à jour est disponible', info.version)
 
                 if (process.platform === 'darwin') {
                     info.darwindownload = `https://github.com/Craftok/Launcher/releases/download/v${info.version}/Craftok-Launcher-${process.arch === 'arm64' ? '-arm64' : ''}.dmg`
@@ -56,8 +56,8 @@ if (!isDev) {
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-downloaded':
-                loggerAutoUpdaterSuccess.log('Update ' + info.version + ' ready to be installed.')
-                settingsUpdateButtonStatus('Install Now', false, () => {
+                loggerAutoUpdaterSuccess.log('La mise à jour ' + info.version + ' est prête à être installée.')
+                settingsUpdateButtonStatus('Installer maintenant', false, () => {
                     if (!isDev) {
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -66,7 +66,7 @@ if (!isDev) {
                 break
             case 'update-not-available':
                 loggerAutoUpdater.log('No new update found.')
-                settingsUpdateButtonStatus('Check for Updates')
+                settingsUpdateButtonStatus('Rechercher une mise à jour')
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
