@@ -23,6 +23,7 @@ jobs:
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}
+          args: "--publish always"
 
           # Si ça contient "RELEASE" au début du commit bah ça va lâcher une bonne grosse prerelease
           #release: ${{ startsWith(github.event_name, 'RELEASE') }}
