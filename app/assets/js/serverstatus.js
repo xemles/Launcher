@@ -9,13 +9,16 @@ const fetch = require('node-fetch')
  */
 exports.getStatus = (address, port = 25565) => {
 
+    addressandport = address + ':' + port
+    if(port == null || port == '' || port == '25565'){
+        addressandport = address
+    }
 
     return new Promise(async (resolve) => {
-        const response = await fetch('https://api.mcsrvstat.us/2/' + address + ':' + port)
+        const response = await fetch('https://api.mcsrvstat.us/2/' + addressandport)
         const data = await response.json()
 
-
-        if (data != null && data != '') {
+        if (data != null && data != '' && data.debug.ping == true) {
             resolve({
                 online: true,
                 version: data.version,
