@@ -8,7 +8,7 @@ const fs                            = require('fs')
 const isDev                         = require('./app/assets/js/isdev')
 const path                          = require('path')
 const semver                        = require('semver')
-const url                           = require('url')
+const { pathToFileURL }             = require('url')
 
 const redirectUriPrefix = 'https://login.microsoftonline.com/common/oauth2/nativeclient?'
 const clientID = '2b4833a6-7c36-42b6-b17b-c3318b40f173'
@@ -180,19 +180,14 @@ function createWindow() {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
             nodeIntegration: true,
             contextIsolation: false,
-            enableRemoteModule: true,
-            worldSafeExecuteJavaScript: true
+            enableRemoteModule: true
         },
         backgroundColor: '#171614'
     })
 
     ejse.data('bkid', Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds')).length)))
 
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'app', 'app.ejs'),
-        protocol: 'file:',
-        slashes: true
-    }))
+    win.loadURL(pathToFileURL(path.join(__dirname, 'app', 'app.ejs')).toString())
 
     /*win.once('ready-to-show', () => {
         win.show()
