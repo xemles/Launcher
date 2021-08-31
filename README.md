@@ -1,5 +1,7 @@
 Ce launcher est basé sur <a href="https://github.com/dscalzi/HeliosLauncher">Helios Launcher</a> !
 
+Bruh
+
 TODO:
 
 <p>Trouver pourquoi on peut pas logout
